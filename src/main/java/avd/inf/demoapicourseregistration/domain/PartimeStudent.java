@@ -14,4 +14,12 @@ public class PartimeStudent extends Student {
 
     public PartimeStudent() {
     }
+
+    public String getWorkingEnvironment() {
+        return workingEnvironment;
+    }
+
+    public void setWorkingEnvironment(String workingEnvironment) {
+        this.workingEnvironment = workingEnvironment;
+    }
 }

@@ -14,4 +14,12 @@ public class FulltimeStudent extends Student {
 
     public FulltimeStudent() {
     }
+
+    public String getStudentCoach() {
+        return studentCoach;
+    }
+
+    public void setStudentCoach(String studentCoach) {
+        this.studentCoach = studentCoach;
+    }
 }
