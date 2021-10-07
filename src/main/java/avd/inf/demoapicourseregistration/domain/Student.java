@@ -1,10 +1,20 @@
 package avd.inf.demoapicourseregistration.domain;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-public class Student {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = PartimeStudent.class, name = "PARTTIME"),
+        @JsonSubTypes.Type(value = FulltimeStudent.class, name = "FULLTIME")
+})
+public abstract class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)

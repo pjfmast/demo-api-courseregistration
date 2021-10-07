@@ -2,6 +2,8 @@ package avd.inf.demoapicourseregistration;
 
 
 
+import avd.inf.demoapicourseregistration.domain.FulltimeStudent;
+import avd.inf.demoapicourseregistration.domain.PartimeStudent;
 import avd.inf.demoapicourseregistration.domain.Student;
 import avd.inf.demoapicourseregistration.repository.StudentRepository;
 import org.slf4j.Logger;
@@ -22,10 +24,10 @@ public class LoadDummyData {
     @Bean
     CommandLineRunner initDatabase(StudentRepository repository) {
         return args -> {
-            log.info("Preloading " + repository.save(new Student("Henk", LocalDate.of(2001,9,1))));
-            log.info("Preloading " + repository.save(new Student("Marie", LocalDate.of(2004,5,10))));
-            log.info("Preloading " + repository.save(new Student("Sophie", LocalDate.of(1998,7,8))));
-            log.info("Preloading " + repository.save(new Student("Ivo", LocalDate.of(1994,3,12))));
+            log.info("Preloading " + repository.save(new PartimeStudent("Henk", LocalDate.of(2001,9,1), "CM")));
+            log.info("Preloading " + repository.save(new FulltimeStudent("Marie", LocalDate.of(2004,5,10), "Joli")));
+            log.info("Preloading " + repository.save(new FulltimeStudent("Sophie", LocalDate.of(1998,7,8), "Maurice")));
+            log.info("Preloading " + repository.save(new PartimeStudent("Ivo", LocalDate.of(1994,3,12), "Bol")));
         };
 
     }
