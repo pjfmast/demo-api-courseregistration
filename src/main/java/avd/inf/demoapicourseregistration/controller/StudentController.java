@@ -39,7 +39,7 @@ public class StudentController {
     }
 
     @GetMapping("/immature")
-    public ResponseEntity<List<Student>> upComingCourses() {
+    public ResponseEntity<List<Student>> getImmatureStudents() {
         List<Student> found = new ArrayList<>();
         LocalDate immatureDate = LocalDate.now().minusYears(18).plusDays(1);
         found.addAll(studentRepository.findByDayOfBirthBetween(immatureDate,LocalDate.now()));
@@ -51,13 +51,13 @@ public class StudentController {
     }
 
     @PostMapping
-    ResponseEntity<Student> newCourse(@RequestBody Student newCourse) {
+    ResponseEntity<Student> create(@RequestBody Student newStudent) {
 
         try {
-            Student student = studentRepository.save(newCourse);
+            Student student = studentRepository.save(newStudent);
             return new ResponseEntity<>(student, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
-            logger.error("Error during creation of: " + newCourse, e);
+            logger.error("Error during creation of: " + newStudent, e);
             return ResponseEntity.badRequest().build();
         }
     }
@@ -75,10 +75,10 @@ public class StudentController {
 
     @PutMapping("/{id}")
     ResponseEntity<Student> update(@PathVariable Long id, @RequestBody Student studentNew) {
-        Optional<Student> optionalCourse = studentRepository.findById(id);
+        Optional<Student> optionalStudent = studentRepository.findById(id);
 
-        if (optionalCourse.isPresent()) {
-            Student studentOld = optionalCourse.get();
+        if (optionalStudent.isPresent()) {
+            Student studentOld = optionalStudent.get();
             studentOld.setName(studentNew.getName());
             studentOld.setDayOfBirth(studentNew.getDayOfBirth());
 
